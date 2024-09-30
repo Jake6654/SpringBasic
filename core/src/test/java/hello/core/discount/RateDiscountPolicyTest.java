@@ -32,6 +32,9 @@ class RateDiscountPolicyTest {
         // when
         int discount = discountPolicy.discount(member,10000);
         // then
+
+
+
         Assertions.assertEquals(0,0);
     }
 
