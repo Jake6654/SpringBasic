@@ -5,15 +5,20 @@ import hello.core.discount.FixDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
-    // DIP 를 철저하게 지킴(추상화에 의존)
-    private final MemberRepository memberRepository;
+    // 필드에 의존관계를 주입
+    private MemberRepository memberRepository;
     private DiscountPolicy discountPolicy;
 
-    // MemberRepository 와 DiscountPolicy 둘다 필요
+    @Autowired // 생성자 주입
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("memberRepository = " + memberRepository);
+        System.out.println("discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }

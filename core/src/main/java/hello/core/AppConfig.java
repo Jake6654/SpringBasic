@@ -28,13 +28,11 @@ public class AppConfig { // 애플리케이션의 실제 동작에 필요한 구
 
     @Bean
     public MemberService memberService(){
-        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public OrderService orderService(){
-        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(),discountPolicy());
     }
 
@@ -45,8 +43,7 @@ public class AppConfig { // 애플리케이션의 실제 동작에 필요한 구
     }
 
     @Bean
-    public MemberRepository memberRepository(){
-        System.out.println("call AppConfig.memberRepository");// 역할을 더욱 명확하게 구분하여 코드의 가독성을 높임
+    public MemberRepository memberRepository(){// 역할을 더욱 명확하게 구분하여 코드의 가독성을 높임
         return new MemoryMemberRepository();
     }
 
