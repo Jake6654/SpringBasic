@@ -1,26 +1,26 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+// @RequiredArgsConstructor // Lombok create constructor automatically for the final variables in the field
+// it also injects dependency auto
 public class OrderServiceImpl implements OrderService{
 
-    // 필드에 의존관계를 주입
-    private MemberRepository memberRepository;
-    private DiscountPolicy discountPolicy;
+    // 생성자 주입을할때 final 을 넣으면 생성자를 통해 의존관계가 들어왔는지 안 들어 왔는지 체크 할 수 있다
+    // 누락을 막을 수 있다
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
     @Autowired // 생성자 주입
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("memberRepository = " + memberRepository);
-        System.out.println("discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
+
     }
 
     @Override
@@ -36,5 +36,9 @@ public class OrderServiceImpl implements OrderService{
     // 테스트 용도
     public MemberRepository getMemberRepository(){
         return memberRepository;
+    }
+
+    public DiscountPolicy getDiscountPolicy() {
+        return discountPolicy;
     }
 }
